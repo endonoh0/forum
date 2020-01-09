@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Forum Threads</div>
+                <div class="card-header">{{ $thread->title }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,13 +14,10 @@
                         </div>
                     @endif
 
-                    @foreach ($threads as $thread)
-                        <article>
-                            <h4 class="title">{{ $thread->title }}</h4>
-                            <div class="body">{{ $thread->body }}</div>
-                        </article>
-                        <hr>
-                    @endforeach
+                    <div class="body">
+                        {{ $thread->body }}
+                    </div>
+
 
                 </div>
             </div>

@@ -15,7 +15,7 @@ class CreateThreadsTable extends Migration
     {
         Schema::create('threads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id'); // Thread belongs to User
+            $table->integer('user_id'); // Thread belongsTo User
             $table->string('title');
             $table->text('body');
             $table->timestamps();
