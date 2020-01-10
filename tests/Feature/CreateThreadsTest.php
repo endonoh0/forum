@@ -16,7 +16,7 @@ class CreateThreadsTest extends TestCase
         $this->withoutExceptionHandling()
             ->expectException('Illuminate\Auth\AuthenticationException');
 
-        $thread = make(Thread::class)->make();
+        $thread = make(Thread::class);
 
         $this->post('/threads', $thread->toArray());
     }
@@ -25,10 +25,9 @@ class CreateThreadsTest extends TestCase
     public function an_authenticated_user_can_create_new_forum_threads()
     {
         $this->withoutExceptionHandling()
-            ->expectException('Illuminate\Database\QueryException');
-        $this->signIn();
+            ->signIn();
 
-        $thread = make(Thread::class)->make();
+        $thread = make(Thread::class);
 
         $this->post('/threads', $thread->toArray());
 
