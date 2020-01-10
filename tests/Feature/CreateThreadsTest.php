@@ -2,7 +2,6 @@
 // phpcs:ignoreFile
 namespace Tests\Feature;
 
-use App\User;
 use App\Thread;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -17,7 +16,7 @@ class CreateThreadsTest extends TestCase
         $this->withoutExceptionHandling()
             ->expectException('Illuminate\Auth\AuthenticationException');
 
-        $thread = factory(Thread::class)->make();
+        $thread = make(Thread::class)->make();
 
         $this->post('/threads', $thread->toArray());
     }
@@ -25,9 +24,11 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_create_new_forum_threads()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->withoutExceptionHandling()
+            ->expectException('Illuminate\Database\QueryException');
+        $this->signIn();
 
-        $thread = factory(Thread::class)->make();
+        $thread = make(Thread::class)->make();
 
         $this->post('/threads', $thread->toArray());
 
