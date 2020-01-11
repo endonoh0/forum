@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
+    /**
+     *  ThreadsController constructor
+     */
     public function __construct()
     {
+        // $this->middleware('auth')->only([]);
         $this->middleware('auth')->except(['index', 'show']);
     }
 
@@ -59,7 +63,7 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Channel $channel
+     * @param  \App\Channel $channel
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
