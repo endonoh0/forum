@@ -64,7 +64,6 @@ class ThreadsController extends Controller
             'body' => request('body')
         ]);
 
-        // back to this thread
         return redirect($thread->path());
     }
 
