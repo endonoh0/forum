@@ -23,7 +23,6 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -36,8 +35,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/threads">All Threads</a>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Browse <span class="caret"></span></a>
+
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div>
+                                <a class="dropdown-item" href="/threads">All Threads</a>
+                            </div>
+
+                            @if (auth()->check())
+                                <div class="dropdown-divider"></div>
+                                <div>
+                                    <a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
+                                </div>
+                            @endif
+
+                          </div>
                         </li>
 
                         <li class="nav-item active">
