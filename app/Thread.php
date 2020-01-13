@@ -62,4 +62,16 @@ class Thread extends Model
     {
         $this->replies()->create($reply);
     }
+
+    /**
+     * Apply all relevant thread filters.
+     *
+     * @param  Builder       $query
+     * @param  ThreadFilters $filters
+     * @return Builder
+     */
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
 }
