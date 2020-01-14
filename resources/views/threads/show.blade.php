@@ -19,7 +19,6 @@
             <br>
 
             {{-- Reply --}}
-
             @foreach ($replies as $reply)
                 @include ('threads.reply')
             @endforeach
@@ -40,7 +39,7 @@
                             rows="5"></textarea>
                     </div>
 
-                    <button type="submit" class="button btn-default">Post</button>
+                    <button type="submit" class="button btn-primary">Post</button>
                 </form>
             @else
                 <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion.</p>
