@@ -1,12 +1,12 @@
 <?php
 // phpcs:ignoreFile
 
-function create($class, $attributes = [])
+function create($class, $attributes = [], $times = null)
 {
-    return factory($class)->create($attributes);
+    return factory($class, $times)->create($attributes);
 }
 
-function make($class, $attributes = [])
+function make($class, $attributes = [], $times = null)
 {
-    return factory($class)->make($attributes);
+    return factory($class, $times)->make($attributes);
 }

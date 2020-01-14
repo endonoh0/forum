@@ -57,6 +57,10 @@
                                 </div>
                             @endif
 
+                            <div>
+                                <a class="dropdown-item" href="/threads?popular=1">Popular Threads</a>
+                            </div>
+
                           </div>
                         </li>
 
