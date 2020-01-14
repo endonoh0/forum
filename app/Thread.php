@@ -13,6 +13,9 @@ class Thread extends Model
      */
     protected $guarded = [];
 
+    /**
+     * Boot the model.
+     */
     protected static function boot()
     {
         parent::boot();
