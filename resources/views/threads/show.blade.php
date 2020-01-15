@@ -8,7 +8,8 @@
             {{-- Thread --}}
             <div class="card">
                 <div class="card-header">
-                    <a href="#">{{ $thread->creator->name }}</a> posted:
+                    {{-- Link to profile --}}
+                    <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a> posted:
                     {{ $thread->title }}
                 </div>
                 <div class="card-body">
