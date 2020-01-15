@@ -8,10 +8,22 @@
             {{-- Thread --}}
             <div class="card">
                 <div class="card-header">
-                    {{-- Link to profile --}}
-                    <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a> posted:
-                    {{ $thread->title }}
+                    <div class="level">
+                        <span class="flex">
+                            {{-- Link to profile --}}
+                            <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a> posted:
+                            {{ $thread->title }}
+                        </span>
+                        {{-- Delete thread --}}
+                        <form method="POST" action="{{ $thread->path() }}">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-link">Delete Thread</button>
+                        </form>
+                    </div>
                 </div>
+
                 <div class="card-body">
                     {{ $thread->body }}
                 </div>
