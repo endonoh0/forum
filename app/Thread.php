@@ -2,6 +2,8 @@
 // phpcs:ignoreFile
 namespace App;
 
+use App\Filters\ThreadFilters;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
@@ -13,6 +15,11 @@ class Thread extends Model
      */
     protected $guarded = [];
 
+    /**
+     * The relations to eager load on every query.
+     *
+     * @return array
+     */
     protected $with = ['creator', 'channel'];
 
     /**
