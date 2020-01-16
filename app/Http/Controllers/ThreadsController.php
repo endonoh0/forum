@@ -85,14 +85,16 @@ class ThreadsController extends Controller
         ]);
     }
 
+    /**
+     * Delete the specifed resource.
+     *
+     * @param Channel   $channel
+     * @param Thread    $thread
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Channel $channel, Thread $thread)
     {
         $this->authorize('update', $thread);
-
-        if ($thread->user_id != auth()->id()) {
-            abort(403, 'You do not have permission to do this.');
-        }
-
 
         $thread->delete();
 
