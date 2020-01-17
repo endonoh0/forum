@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reply;
 use App\Thread;
 use App\channel;
 
@@ -32,5 +33,14 @@ class RepliesController extends Controller
         ]);
 
         return back()->with('flash', 'Your reply has been left.');
+    }
+
+    public function destroy(Reply $reply)
+    {
+        $this->authorize('update', $reply);
+
+        $reply->delete();
+
+        return back();
     }
 }
