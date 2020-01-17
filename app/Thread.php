@@ -1,13 +1,15 @@
 <?php
-// phpcs:ignoreFile
+
 namespace App;
 
 use App\Filters\ThreadFilters;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Thread extends Model
 {
+    use RecordsActivity;
+
     /**
      * Don't auto-apply mass assignment protection.
      *
