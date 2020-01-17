@@ -1,5 +1,5 @@
 <?php
-// phpcs:ignoreFile
+
 namespace Tests\Unit;
 
 use App\User;

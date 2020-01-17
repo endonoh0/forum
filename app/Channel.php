@@ -1,5 +1,5 @@
 <?php
-// phpcs:ignoreFile
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;

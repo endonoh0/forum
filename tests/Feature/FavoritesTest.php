@@ -1,5 +1,5 @@
 <?php
-// phpcs:ignoreFile
+
 namespace Tests\Feature;
 
 use App\Reply;

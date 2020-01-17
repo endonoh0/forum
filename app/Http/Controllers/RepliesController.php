@@ -1,5 +1,5 @@
 <?php
-// phpcs:ignoreFile
+
 namespace App\Http\Controllers;
 
 use App\Thread;

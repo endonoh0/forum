@@ -1,5 +1,5 @@
 <?php
-// phpcs:ignoreFile
+
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;

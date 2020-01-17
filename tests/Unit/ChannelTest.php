@@ -1,6 +1,6 @@
 <?php
-// phpcs:ignoreFile
-namespace Tests\Feature;
+
+namespace Tests\Unit;
 
 use App\Thread;
 use App\Channel;
