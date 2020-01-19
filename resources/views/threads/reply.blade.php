@@ -1,41 +1,54 @@
-<div id="reply-{{ $reply->id }}" class="card">
-    <div class="card-header">
-        <div class="level">
-            <h6 class="flex">
-            {{-- Link to profile --}}
-                <a href="{{ route('profile', $reply->owner) }}">
-                    {{ $reply->owner->name }}
-                </a> said {{ $reply->created_at->diffForHumans() }}...
-            </h6>
-            {{-- Favorite form --}}
-            <div>
-                <form method="POST" action="/replies/{{ $reply->id }}/favorites">
-                    @csrf
+<reply :attributes="{{ $reply }}" inline-template v-cloak> {{-- add colon to treat as json and pass the $reply as attributes --}}
+    <div id="reply-{{ $reply->id }}" class="card">
+        <div class="card-header">
+            <div class="level">
+                <h6 class="flex">
+                {{-- Link to profile --}}
+                    <a href="{{ route('profile', $reply->owner) }}">
+                        {{ $reply->owner->name }}
+                    </a> said {{ $reply->created_at->diffForHumans() }}...
+                </h6>
+                {{-- Favorite form --}}
+                <div>
+                    <form method="POST" action="/replies/{{ $reply->id }}/favorites">
+                        @csrf
 
-                    <button type="submit" class="button btn-default" {{ $reply->isFavorited() ? 'disabled' : '' }}>
-                        {{ $reply->favorites_count }} {{ Str::plural('Favorite', $reply->favorites_count) }}
-                    </button>
-                </form>
+                        <button type="submit" class="button btn-default" {{ $reply->isFavorited() ? 'disabled' : '' }}>
+                            {{ $reply->favorites_count }} {{ Str::plural('Favorite', $reply->favorites_count) }}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+        {{-- Edit the reply --}}
+        <div class="card-body">
+            <div v-if="editing">
+                <div class="form-group">
+                    <textarea class="form-control" v-model="body"></textarea>
+                </div>
+                {{-- Update the reply --}}
+                <button class="button btn-xs btn-primary" @click="update">Update</button>
+                {{-- Cancel the edit --}}
+                <button class="button btn-xs btn-link" @click="editing = false">Cancel</button>
+            </div>
 
-    <div class="card-body">
-        {{ $reply->body }}
-    </div>
-
-    @can ('update', $reply)
-        {{-- Delete reply --}}
-        <div class="card-footer">
-            <form method="POST" action="/replies/{{ $reply->id }}">
-                @csrf
-                @method('DELETE')
-
-                <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-            </form>
+            <div v-else v-text="body"></div>
         </div>
-    @endcan
-</div>
-<br>
 
+        @can ('update', $reply)
+            {{-- Delete reply --}}
+            <div class="card-footer level">          {{-- click set to true --}}
+                <button class="btn-info btn-xs mr-1" @click="editing = true">Edit</button>
+
+                <form method="POST" action="/replies/{{ $reply->id }}">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                </form>
+            </div>
+        @endcan
+    </div>
+</reply>
+<br>
 

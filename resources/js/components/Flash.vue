@@ -20,7 +20,9 @@
                 this.flash(this.message);
             }
 
-            windows.event.$on('flash', message => this.flash(message));
+            window.events.$on(
+                'flash', message => this.flash(message)
+            );
         },
 
         methods: {
