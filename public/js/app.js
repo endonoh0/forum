@@ -2003,6 +2003,12 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.editing = false;
       flash('Updated!');
+    },
+    destroy: function destroy() {
+      axios["delete"]('/replies/' + this.attributes.id);
+      $(this.$el).fadeOut(300, function () {
+        flash('Your reply has been deleted.');
+      });
     }
   }
 });
@@ -50260,8 +50266,8 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 try {
-  // window.Popper = require('popper.js').default;
-  // window.$ = window.jQuery = require('jquery');
+  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
+  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
   window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");

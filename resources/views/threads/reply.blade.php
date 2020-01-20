@@ -39,13 +39,7 @@
             {{-- Delete reply --}}
             <div class="card-footer level">          {{-- click set to true --}}
                 <button class="btn-info btn-xs mr-1" @click="editing = true">Edit</button>
-
-                <form method="POST" action="/replies/{{ $reply->id }}">
-                    @csrf
-                    @method('DELETE')
-
-                    <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-                </form>
+                <button class="btn-info btn-xs btn-danger" @click="destroy">Delete</button>
             </div>
         @endcan
     </div>
