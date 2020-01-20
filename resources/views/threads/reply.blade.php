@@ -9,10 +9,12 @@
                     </a> said {{ $reply->created_at->diffForHumans() }}...
                 </h6>
 
-                {{-- Favorite --}}
-                <div>
-                    <favorite :reply="{{ $reply }}"></favorite>
-                </div>
+                @if (Auth::check())
+                    {{-- Favorite --}}
+                    <div>
+                        <favorite :reply="{{ $reply }}"></favorite>
+                    </div>
+                @endif
             </div>
         </div>
 
