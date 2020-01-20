@@ -1,7 +1,11 @@
 <script>
+    import Favorite from './Favorite.vue';
     // Export vue instance to determine the reply layout
     export default {
         props: ['attributes'], // equals to $reply
+
+        components: { Favorite }, // child-component <Favorite></favorite>
+
         // between v-f and v-else
         data() {
             return {
