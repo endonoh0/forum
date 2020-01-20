@@ -1,4 +1,4 @@
-<reply :attributes="{{ $reply }}" inline-template v-cloak> {{-- add colon to treat as json and pass the $reply as attributes --}}
+<reply :attributes="{{ $reply }}" inline-template v-cloak>
     <div id="reply-{{ $reply->id }}" class="card">
         <div class="card-header">
             <div class="level">
@@ -8,18 +8,14 @@
                         {{ $reply->owner->name }}
                     </a> said {{ $reply->created_at->diffForHumans() }}...
                 </h6>
-                {{-- Favorite form --}}
-                <div>
-                    <form method="POST" action="/replies/{{ $reply->id }}/favorites">
-                        @csrf
 
-                        <button type="submit" class="button btn-default" {{ $reply->isFavorited() ? 'disabled' : '' }}>
-                            {{ $reply->favorites_count }} {{ Str::plural('Favorite', $reply->favorites_count) }}
-                        </button>
-                    </form>
+                {{-- Favorite --}}
+                <div>
+                    <favorite :reply="{{ $reply }}"></favorite>
                 </div>
             </div>
         </div>
+
         {{-- Edit the reply --}}
         <div class="card-body">
             <div v-if="editing">
@@ -31,13 +27,12 @@
                 {{-- Cancel the edit --}}
                 <button class="button btn-xs btn-link" @click="editing = false">Cancel</button>
             </div>
-
             <div v-else v-text="body"></div>
         </div>
 
         @can ('update', $reply)
             {{-- Delete reply --}}
-            <div class="card-footer level">          {{-- click set to true --}}
+            <div class="card-footer level">
                 <button class="btn-info btn-xs mr-1" @click="editing = true">Edit</button>
                 <button class="btn-info btn-xs btn-danger" @click="destroy">Delete</button>
             </div>
