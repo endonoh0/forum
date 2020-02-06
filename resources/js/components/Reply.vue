@@ -1,23 +1,66 @@
+<template>
+    <div :id="'reply-'+id" class="card">
+        <div class="card-header">
+            <div class="level">
+                <h6 class="flex">
+                    <a :href="'/profiles/'+data.owner.name"
+                        v-text="data.owner.name">
+                    </a> said {{ data.created_at }}...
+                </h6>
+
+                <div v-if="signedIn">
+                    <favorite :reply="data"></favorite>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div v-if="editing">
+                <div class="form-group">
+                    <textarea class="form-control" v-model="body"></textarea>
+                </div>
+                <button class="button btn-xs btn-primary" @click="update">Update</button>
+                <button class="button btn-xs btn-link" @click="editing = false">Cancel</button>
+            </div>
+            <div v-else v-text="body"></div>
+        </div>
+
+        <div class="card-footer level" v-if="canUpdate">
+            <button class="btn-info btn-xs mr-1" @click="editing = true">Edit</button>
+            <button class="btn-info btn-xs btn-danger" @click="destroy">Delete</button>
+        </div>
+    </div>
+</template>
+
 <script>
     import Favorite from './Favorite.vue';
-    // Export vue instance to determine the reply layout
+
     export default {
-        props: ['attributes'], // equals to $reply
+        props: ['data'],
 
-        components: { Favorite }, // child-component <Favorite></favorite>
+        components: { Favorite },
 
-        // between v-f and v-else
         data() {
             return {
                 editing: false,
-                body: this.attributes.body
+                id: this.data.id,
+                body: this.data.body
             };
+        },
+
+        computed: {
+            signedIn() {
+                return window.App.signedIn;
+            },
+
+            canUpdate() {
+                return this.authorize(user => this.data.user_id == user.id);
+            }
         },
 
         methods: {
             update() {
-                // axios request: patch to this uri, send through the updated body
-                axios.patch('/replies/' + this.attributes.id, {
+                axios.patch('/replies/' + this.data.id, {
                     body: this.body
                 });
 
@@ -27,12 +70,10 @@
             },
 
             destroy() {
-                axios.delete('/replies/' + this.attributes.id);
+                axios.delete('/replies/' + this.data.id);
 
-                $(this.$el).fadeOut(300, () => {
-                    flash('Your reply has been deleted.');
-                });
+                this.$emit('deleted', this.data.id);
             }
         }
-    }
+    };
 </script>
