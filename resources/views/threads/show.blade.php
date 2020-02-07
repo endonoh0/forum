@@ -33,15 +33,8 @@
                     <br>
 
                     {{-- Reply --}}
-                    <replies :data="{{ $thread->replies }}"
-                        @added="repliesCount++"
-                        @removed="repliesCount--"></replies>
-
-                    {{ $replies->links() }}
-
-                    {{-- Reply Form --}}
+                    <replies @added="repliesCount++" @removed="repliesCount--"></replies>
                     <br>
-
                 </div>
 
                 {{-- Meta Information --}}

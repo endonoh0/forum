@@ -13,7 +13,18 @@ class RepliesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'index']);
+    }
+
+    /**
+     * Fetch all relevant replies.
+     *
+     * @param integer $channel Id
+     * @param Thread  $thread
+     */
+    public function index(Channel $channel, Thread $thread)
+    {
+        return $thread->replies()->paginate(20);
     }
 
     /**
