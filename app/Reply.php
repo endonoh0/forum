@@ -22,6 +22,9 @@ class Reply extends Model
      */
     protected $with = ['owner', 'favorites'];
 
+    /**
+     * Boot the reply instance.
+     */
     protected static function boot()
     {
         parent::boot();
