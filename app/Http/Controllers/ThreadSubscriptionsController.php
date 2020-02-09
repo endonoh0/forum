@@ -7,6 +7,12 @@ use App\Channel;
 
 class ThreadSubscriptionsController extends Controller
 {
+    /**
+     * Store a nw thread subscription.
+     *
+     * @param  Channel $channel The channelId.
+     * @param  Thread  $thread
+     */
     public function store(Channel $channel, Thread $thread)
     {
         $thread->subscribe();

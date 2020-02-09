@@ -99,6 +99,11 @@ class Thread extends Model
         return $filters->apply($query);
     }
 
+    /**
+     * Subscribe a user to the current thread.
+     *
+     * @param int|null $userId
+     */
     public function subscribe($userId = null)
     {
         $this->subscriptions()->create([
@@ -106,6 +111,11 @@ class Thread extends Model
         ]);
     }
 
+    /**
+     * Unsubscribe a user from the current thread.
+     *
+     * @param int|null $userId
+     */
     public function unsubscribe($userId = null)
     {
         $this->subscriptions()
@@ -113,6 +123,11 @@ class Thread extends Model
             ->delete();
     }
 
+    /**
+     * A thread can have many subscriptions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function subscriptions()
     {
         return $this->hasMany(ThreadSubscription::class);

@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ThreadSubscription extends Model
 {
-    protected $guarded = []; // yolo
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var  array
+     */
+    protected $guarded = [];
 }
