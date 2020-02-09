@@ -25,6 +25,13 @@ class Thread extends Model
     protected $with = ['creator', 'channel'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var  array
+     */
+    protected $appends = ['isSubscribedTo'];
+
+    /**
      * Boot the model.
      */
     protected static function boot()
@@ -131,5 +138,17 @@ class Thread extends Model
     public function subscriptions()
     {
         return $this->hasMany(ThreadSubscription::class);
+    }
+
+    /**
+     * Determine if the current user is subscribed to the thread.
+     *
+     * @return  boolean
+     */
+    public function getIsSubscribedToAttribute()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 }

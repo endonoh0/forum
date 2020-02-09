@@ -17,4 +17,15 @@ class ThreadSubscriptionsController extends Controller
     {
         $thread->subscribe();
     }
+
+    /**
+     * Delete an existing thread subscriptions.
+     *
+     * @param  Channel $channel The channel id.
+     * @param  Thread $thread
+     */
+    public function destroy(Channel $channel, Thread $thread)
+    {
+        $thread->unsubscribe();
+    }
 }
