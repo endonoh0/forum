@@ -1,6 +1,4 @@
 <?php
-// phpcs:ignoreFile
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
 use App\Reply;
@@ -61,5 +59,17 @@ $factory->define(Reply::class, function (Faker $faker) {
             return factory(User::class)->create()->id;
         },
         'body' => $faker->paragraph
+    ];
+});
+
+$factory->define(\Illuminate\Notifications\DatabaseNotification::class, function (Faker $faker) {
+    return [
+        'id' => Str::uuid()->toString(),
+        'type' => 'App\Notifications\ThreadWasUpdated',
+        'notifiable_id' => function () {
+            return auth()->id() ?: factory('App\User')->create()->id;
+        },
+        'notifiable_type' => 'App\User',
+        'data' => ['foo' => 'bar']
     ];
 });
