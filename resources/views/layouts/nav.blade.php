@@ -63,6 +63,9 @@
                         </li>
                     @endif
                 @else
+                    <!-- Notifications -->
+                    <user-notifications></user-notifications>
+
                     <!-- Username drop down -->
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -70,7 +73,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <!-- Link to my profile -->
-                            <div><a class="dropdown-item" href="{{ route('profile', Auth::user()) }}">My Profile</a></div>
+                            <div>
+                                <a class="dropdown-item" href="{{ route('profile', Auth::user()) }}">My Profile</a>
+                            </div>
                             <!-- Logout -->
                             <div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
