@@ -98,6 +98,11 @@ class Thread extends Model
         return $reply;
     }
 
+    /**
+     * Notify all thread subscribers about a new reply.
+     *
+     * @param \App\Reply $reply
+     */
     public function notifySubscribers($reply)
     {
         $this->subscriptions
