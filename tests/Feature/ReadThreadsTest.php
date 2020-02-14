@@ -42,8 +42,8 @@ class ThreadsTest extends TestCase
         $threadNotInChannel = create(Thread::class);
 
         $this->get('/threads/' . $channel->slug)
-            ->assertSee($threadInChannel->title);
-        // ->assertDontSee($threadNotInChannel->title);
+            ->assertSee($threadInChannel->title)
+            ->assertDontSee($threadNotInChannel->title);
     }
 
     /** @test */
