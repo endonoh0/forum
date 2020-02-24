@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Spam;
 use App\Reply;
 use App\Thread;
 use App\channel;
+use App\Inspections\Spam;
 
 class RepliesController extends Controller
 {
@@ -31,9 +31,9 @@ class RepliesController extends Controller
     /**
      * Persist a new reply.
      *
-     * @param integer                   $channel Id
-     * @param Thread                    $thread
-     * @param Spam                      $spam
+     * @param  integer $channel Id
+     * @param  Thread  $thread
+     * @param  Spam    $spam
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Channel $channel, Thread $thread, Spam $spam)
