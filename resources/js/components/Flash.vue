@@ -1,5 +1,5 @@
 <template>
-    <div class="alert alert-flash fade show"
+    <div class="alert alert-flash"
         :class="'alert-'+level"
         role="alert"
         v-show="show"

@@ -56089,7 +56089,7 @@ var render = function() {
     directives: [
       { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
     ],
-    staticClass: "alert alert-flash fade show",
+    staticClass: "alert alert-flash",
     class: "alert-" + _vm.level,
     attrs: { role: "alert" },
     domProps: { textContent: _vm._s(_vm.body) }
