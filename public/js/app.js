@@ -1989,11 +1989,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['message'],
   data: function data() {
     return {
       body: '',
+      level: 'success',
       show: false
     };
   },
@@ -2004,13 +2008,14 @@ __webpack_require__.r(__webpack_exports__);
       this.flash(this.message);
     }
 
-    window.events.$on('flash', function (message) {
-      return _this.flash(message);
+    window.events.$on('flash', function (data) {
+      return _this.flash(data);
     });
   },
   methods: {
-    flash: function flash(message) {
-      this.body = message;
+    flash: function flash(data) {
+      this.body = data.message;
+      this.level = data.level;
       this.show = true;
       this.hide();
     },
@@ -2078,6 +2083,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(location.pathname + '/replies', {
         body: this.body
+      })["catch"](function (error) {
+        flash(error.response.data, 'danger');
       }).then(function (_ref) {
         var data = _ref.data;
         _this.body = '';
@@ -2295,6 +2302,8 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       axios.patch('/replies/' + this.data.id, {
         body: this.body
+      })["catch"](function (error) {
+        flash(error.response.data, 'danger');
       });
       this.editing = false;
       flash('Updated!');
@@ -56076,17 +56085,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-      ],
-      staticClass: "alert alert-success alert-flash fade show",
-      attrs: { role: "alert" }
-    },
-    [_c("strong", [_vm._v("Success!")]), _vm._v(" " + _vm._s(_vm.body) + "\n")]
-  )
+  return _c("div", {
+    directives: [
+      { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+    ],
+    staticClass: "alert alert-flash fade show",
+    class: "alert-" + _vm.level,
+    attrs: { role: "alert" },
+    domProps: { textContent: _vm._s(_vm.body) }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -68703,7 +68710,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.events = new Vue();
 
 window.flash = function (message) {
-  window.events.$emit('flash', message);
+  var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+  window.events.$emit('flash', {
+    message: message,
+    level: level
+  });
 };
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -68735,7 +68746,6 @@ var app = new Vue({
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
-  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
   window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
@@ -68976,15 +68986,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./resources/js/components/Paginator.vue ***!
   \***********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Paginator_vue_vue_type_template_id_59656db6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Paginator.vue?vue&type=template&id=59656db6& */ "./resources/js/components/Paginator.vue?vue&type=template&id=59656db6&");
 /* harmony import */ var _Paginator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Paginator.vue?vue&type=script&lang=js& */ "./resources/js/components/Paginator.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Paginator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Paginator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -69014,7 +69023,7 @@ component.options.__file = "resources/js/components/Paginator.vue"
 /*!************************************************************************!*\
   !*** ./resources/js/components/Paginator.vue?vue&type=script&lang=js& ***!
   \************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
