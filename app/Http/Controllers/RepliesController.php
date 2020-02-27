@@ -37,7 +37,8 @@ class RepliesController extends Controller
     public function store(Channel $channel, Thread $thread)
     {
         try {
-            request()->validate(['body' => 'required|spamfree']);
+            $this->authorize('create', new Reply);
+            $this->validate(request(), ['body' => 'required|spamfree']);
 
             $reply = $thread->addReply([
                 'body' => request('body'),

@@ -36,13 +36,13 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function a_reply_requires_a_body()
     {
-        $this->signIn();
+        $this->withExceptionHandling()->signIn();
 
         $thread = create(Thread::class);
         $reply = make(Reply::class, ['body' => null]);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
-            ->assertSessionHasErrors('body');
+            ->assertStatus(422);
     }
 
     /** @test */
@@ -105,7 +105,6 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function replies_that_contain_spam_may_not_be_created()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
 
         $thread = create(Thread::class);
@@ -113,8 +112,24 @@ class ParticipateInForumTest extends TestCase
             'body' => 'I am a spam bot'
         ]);
 
-        $this->expectException(\Exception::class);
+        $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(422);
+    }
 
-        $this->post($thread->path() . '/replies', $reply->toArray());
+    /** @test */
+    public function users_may_only_reply_a_maximum_of_once_per_minute()
+    {
+        $this->signIn();
+
+        $thread = create(Thread::class);
+        $reply = make(Reply::class, [
+         'body' => 'A regular reply.'
+     ]);
+
+        $this->post($thread->path() . '/replies', $reply->toArray())
+         ->assertStatus(201);
+
+        $this->post($thread->path() . '/replies', $reply->toArray())
+         ->assertStatus(422);
     }
 }
