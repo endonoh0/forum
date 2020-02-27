@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Thread;
 use App\channel;
+use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
 {
@@ -36,8 +37,14 @@ class RepliesController extends Controller
      */
     public function store(Channel $channel, Thread $thread)
     {
+        if (Gate::denies('create', new Reply)) {
+            return response(
+                'You are posting too frequently. Please wait a moment. :)',
+                429
+            );
+        }
+
         try {
-            $this->authorize('create', new Reply);
             $this->validate(request(), ['body' => 'required|spamfree']);
 
             $reply = $thread->addReply([
