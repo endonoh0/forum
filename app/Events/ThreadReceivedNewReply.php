@@ -12,7 +12,7 @@ class ThreadReceivedNewReply
     public $reply;
 
     /**
-     * ThreadReceivedNewReply constructor.
+     * Create a new reply instance.
      *
      * @param $reply
      */
