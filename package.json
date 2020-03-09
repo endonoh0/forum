@@ -24,6 +24,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "font-awesome": "^4.7.0"
+        "at.js": "^1.5.4",
+        "font-awesome": "^4.7.0",
+        "jquery.caret": "^0.3.1",
+        "popper.js": "^1.16.1"
     }
 }
