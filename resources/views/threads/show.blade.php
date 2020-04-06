@@ -14,6 +14,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="level">
+                    {{-- Thread creator avatar --}}
+                                <img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-3">
+
                                 <span class="flex">
                     {{-- Link to profile --}}
                                     <a href="{{ route('profile', $thread->creator) }}">

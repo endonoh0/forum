@@ -90,6 +90,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the path to the user's avatar.
+     *
+     * @param  string $avatar
+     * @return string
+     */
+    public function getAvatarPathAttribute($avatar)
+    {
+        return asset($avatar ?: 'images/avatars/default.png');
+    }
+
+    /**
      * Get the cache key for when a user reads a thread.
      *
      * @param  Thread $thread
@@ -97,6 +108,6 @@ class User extends Authenticatable
      */
     public function visitedThreadCacheKey($thread)
     {
-        return sprintf("users.%s.visits.%s", $this->id, $thread->id);
+        return sprintf('users.%s.visits.%s', $this->id, $thread->id);
     }
 }

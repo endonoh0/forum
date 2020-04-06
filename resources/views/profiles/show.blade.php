@@ -5,10 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card-header">
-                    {{-- Profile header --}}
-                    <h2>
-                        {{ $profileUser->name }}
-                    </h2>
+                {{-- Add Avatar form --}}
+                    <avatar-form :user="{{ $profileUser }}"></avatar-form>
                 </div>
 
                 <br>
