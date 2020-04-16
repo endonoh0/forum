@@ -3,6 +3,9 @@
 node_modules/
 npm-debug.log
 yarn-error.log
+.vscode
+.eslintrc.json
+.editorconfig
 
 # Laravel 4 specific
 bootstrap/compiled.php

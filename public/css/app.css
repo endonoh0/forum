@@ -14409,3 +14409,11 @@ a.text-dark:focus {
   }
 }
 
+.card-success {
+  background-color: #d6e9c6;
+}
+
+.card-default {
+  background-color: #fff;
+}
+
