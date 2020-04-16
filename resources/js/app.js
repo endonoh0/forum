@@ -8,14 +8,19 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.prototype.authorize = function (handler) {
-    // Additional admin privileges here.
-        // return true; for testing
+let authorizations = require('./authorizations');
 
-    let user = window.App.user;
+Vue.prototype.authorize = function (...params) {
+    if (! window.App.signedIn) return false;
 
-    return user ? handler(user) : false;
+    if (typeof params[0] === "string") {
+        return authorizations[params[0]](params[1]);
+    }
+
+    return params[0](window.App.user);
 };
+
+Vue.prototype.signedIn = window.App.signedIn;
 
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('paginator', require('./components/Paginator.vue').default);
