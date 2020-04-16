@@ -21,8 +21,10 @@ class CreateThreadsTable extends Migration
             $table->unsignedInteger('visits')->default(0);
             $table->string('title');
             $table->text('body');
-            $table->unsignedInteger('best_reply_id')->nullable();
+            $table->unsignedBigInteger('best_reply_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('best_reply_id')->references('id')->on('replies')->onDelete('set null');
         });
     }
 
