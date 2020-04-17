@@ -22,9 +22,9 @@ class ThreadsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Channel       $channel
-     * @param ThreadFilters $filters
-     * @param Trending      $trending
+     * @param  Channel       $channel
+     * @param  ThreadFilters $filters
+     * @param  Trending      $trending
      * @return \Illuminate\Http\Response
      */
     public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
@@ -104,10 +104,28 @@ class ThreadsController extends Controller
     }
 
     /**
+     * Update the given thread.
+     *
+     * @param string $channel
+     * @param Thread $thread
+     */
+    public function update(Channel $channel, Thread $thread)
+    {
+        $this->authorize('update', $thread);
+
+        $thread->update(request()->validate([
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree'
+        ]));
+
+        return $thread;
+    }
+
+    /**
      * Delete the specifed resource.
      *
-     * @param Channel   $channel
-     * @param Thread    $thread
+     * @param  Channel   $channel
+     * @param  Thread    $thread
      * @return \Illuminate\Http\Response
      */
     public function destroy(Channel $channel, Thread $thread)
@@ -126,8 +144,8 @@ class ThreadsController extends Controller
     /**
      * Fetch all relevant threads.
      *
-     * @param Channel       $channel
-     * @param ThreadFilters $filters
+     * @param  Channel       $channel
+     * @param  ThreadFilters $filters
      * @return mixed
      */
     protected function getThreads(Channel $channel, ThreadFilters $filters)

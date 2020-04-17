@@ -128,6 +128,7 @@ class CreateThreadsTest extends TestCase
         $this->delete($thread->path())->assertStatus(403);
     }
 
+
     /** @test */
     public function authorized_users_can_delete_threads()
     {
