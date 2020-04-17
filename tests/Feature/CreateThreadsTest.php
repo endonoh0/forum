@@ -2,9 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Reply;
-use App\Thread;
-use App\Channel;
 use App\Activity;
 use Tests\TestCase;
 use App\Rules\Recaptcha;
@@ -42,7 +39,7 @@ class CreateThreadsTest extends TestCase
 
         $this->signIn($user);
 
-        $thread = make(Thread::class);
+        $thread = make('App\Thread');
 
         return $this->post(route('threads'), $thread->toArray())
             ->assertRedirect(route('threads'))
@@ -85,7 +82,7 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function a_thread_requires_a_valid_channel()
     {
-        factory(Channel::class, 2)->create();
+        factory('App\Channel', 2)->create();
 
         $this->publishThread(['channel_id' => null])
             ->assertSessionHasErrors('channel_id');
@@ -97,7 +94,7 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function a_thread_requires_a_unique_slug()
     {
-        $this->withoutExceptionHandling()->signIn();
+        $this->signIn();
 
         $thread = create('App\Thread', ['title' => 'Foo Title']);
 
@@ -111,7 +108,7 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function a_thread_with_a_title_that_ends_with_a_number_should_generate_the_proper_slug()
     {
-        $this->withoutExceptionHandling()->signIn();
+        $this->signIn();
 
         $thread = create('App\Thread', ['title' => 'Foo Title 24']);
 
@@ -123,9 +120,7 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function unauthorized_users_may_not_delete_threads()
     {
-        $this->withExceptionHandling();
-
-        $thread = create(Thread::class);
+        $thread = create('App\Thread');
 
         $this->delete($thread->path())->assertRedirect(route('login'));
 
@@ -138,8 +133,8 @@ class CreateThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create(Thread::class, ['user_id' => auth()->id()]);
-        $reply = create(Reply::class, ['thread_id' => $thread->id]);
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $reply = create('App\Reply', ['thread_id' => $thread->id]);
 
         $response = $this->json('DELETE', $thread->path());
 
@@ -155,7 +150,7 @@ class CreateThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $thread = make(Thread::class, $overrides);
+        $thread = make('App\Thread', $overrides);
 
         return $this->post(route('threads'), $thread->toArray() + ['g-recaptcha-response' => 'token']);
     }

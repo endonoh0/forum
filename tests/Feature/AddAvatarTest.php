@@ -14,8 +14,6 @@ class AddAvatarTest extends TestCase
     /** @test */
     public function only_members_can_add_avatars()
     {
-        $this->withExceptionHandling();
-
         $this->json('POST', 'api/users/1/avatar')
             ->assertStatus(401);
     }
@@ -23,7 +21,7 @@ class AddAvatarTest extends TestCase
     /** @test */
     public function a_valid_avatar_must_be_provided()
     {
-        $this->withExceptionHandling()->signIn();
+        $this->signIn();
 
         $this->json('POST', 'api/users/' . auth()->id() . '/avatar', [
             'avatar' => 'not-an-image'

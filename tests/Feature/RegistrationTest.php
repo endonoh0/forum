@@ -15,8 +15,6 @@ class RegistrationTest extends TestCase
     /** @test */
     public function a_confirmation_email_is_sent_upon_registration()
     {
-        $this->withoutExceptionHandling();
-
         Mail::fake();
 
         $this->post(route('register'), [

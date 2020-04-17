@@ -20,8 +20,6 @@ class NotificationsTest extends TestCase
     /** @test */
     public function a_notication_is_prepared_when_a_subscribed_thread_recieves_a_new_reply_that_is_not_by_the_current_user()
     {
-        $this->withoutExceptionHandling();
-
         $thread = create('App\Thread')->subscribe();
 
         $this->assertCount(0, auth()->user()->notifications);
@@ -44,8 +42,6 @@ class NotificationsTest extends TestCase
     /** @test */
     public function a_user_can_fetch_their_unread_notifications()
     {
-        $this->withoutExceptionHandling();
-
         create(DatabaseNotification::class);
 
         $this->assertCount(
@@ -57,8 +53,6 @@ class NotificationsTest extends TestCase
     /** @test */
     public function a_user_can_mark_a_notificaiton_as_read()
     {
-        $this->withoutExceptionHandling();
-
         create(DatabaseNotification::class);
 
         tap(auth()->user(), function ($user) {

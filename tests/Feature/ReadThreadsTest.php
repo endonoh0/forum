@@ -2,10 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Reply;
-use App\Thread;
-use App\Channel;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -17,7 +13,7 @@ class ThreadsTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = factory(Thread::class)->create();
+        $this->thread = factory('App\Thread')->create();
     }
 
     /** @test */
@@ -37,9 +33,9 @@ class ThreadsTest extends TestCase
     /** @test */
     public function a_user_can_filter_threads_according_to_a_channel()
     {
-        $channel = create(Channel::class);
-        $threadInChannel = create(Thread::class, ['channel_id' => $channel->id]);
-        $threadNotInChannel = create(Thread::class);
+        $channel = create('App\Channel');
+        $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
+        $threadNotInChannel = create('App\Thread');
 
         $this->get('/threads/' . $channel->slug)
             ->assertSee($threadInChannel->title)
@@ -49,10 +45,10 @@ class ThreadsTest extends TestCase
     /** @test */
     public function a_user_can_filter_threads_by_any_username()
     {
-        $this->signIn(create(User::class, ['name' => 'JohnDoe']));
+        $this->signIn(create('App\User', ['name' => 'JohnDoe']));
 
-        $threadByJohn = create(Thread::class, ['user_id' => auth()->id()]);
-        $threadNotByJohn = create(Thread::class);
+        $threadByJohn = create('App\Thread', ['user_id' => auth()->id()]);
+        $threadNotByJohn = create('App\Thread');
 
         $this->get('/threads?by=JohnDoe')
             ->assertSee($threadByJohn->title)
@@ -62,11 +58,11 @@ class ThreadsTest extends TestCase
     /** @test */
     public function a_user_can_filter_threads_by_popularity()
     {
-        $threadWithTwoReplies = create(Thread::class);
-        create(Reply::class, ['thread_id' => $threadWithTwoReplies->id], 2);
+        $threadWithTwoReplies = create('App\Thread');
+        create('App\Reply', ['thread_id' => $threadWithTwoReplies->id], 2);
 
-        $threadWithThreeReplies = create(Thread::class);
-        create(Reply::class, ['thread_id' => $threadWithThreeReplies->id], 3);
+        $threadWithThreeReplies = create('App\Thread');
+        create('App\Reply', ['thread_id' => $threadWithThreeReplies->id], 3);
 
         $threadWithNoReplies = $this->thread;
 
@@ -90,7 +86,7 @@ class ThreadsTest extends TestCase
     public function a_user_can_request_all_replies_for_a_given_thread()
     {
         $thread = create('App\Thread');
-        create(Reply::class, ['thread_id' => $thread->id], 2);
+        create('App\Reply', ['thread_id' => $thread->id], 2);
 
         $response = $this->getJson($thread->path() . '/replies')->json();
 

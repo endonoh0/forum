@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Reply;
-use App\Thread;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -24,8 +22,8 @@ class ParticipateInForumTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create(Thread::class);
-        $reply = make(Reply::class);
+        $thread = create('App\Thread');
+        $reply = make('App\Reply');
 
         $this->post($thread->path() . '/replies', $reply->toArray());
 
@@ -36,10 +34,10 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function a_reply_requires_a_body()
     {
-        $this->withExceptionHandling()->signIn();
+        $this->signIn();
 
-        $thread = create(Thread::class);
-        $reply = make(Reply::class, ['body' => null]);
+        $thread = create('App\Thread');
+        $reply = make('App\Reply', ['body' => null]);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertSessionHasErrors('body');
@@ -48,8 +46,6 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function unauthorized_users_cannot_delete_replies()
     {
-        $this->withExceptionHandling();
-
         $reply = create('App\Reply');
 
         $this->delete("/replies/{$reply->id}")
@@ -105,11 +101,10 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function replies_that_contain_spam_may_not_be_created()
     {
-        $this->withExceptionHandling();
         $this->signIn();
 
-        $thread = create(Thread::class);
-        $reply = make(Reply::class, [
+        $thread = create('App\Thread');
+        $reply = make('App\Reply', [
             'body' => 'I am a spam bot'
         ]);
 
@@ -120,11 +115,10 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function users_may_only_reply_a_maximum_of_once_per_minute()
     {
-        $this->withExceptionHandling();
         $this->signIn();
 
-        $thread = create(Thread::class);
-        $reply = make(Reply::class, [
+        $thread = create('App\Thread');
+        $reply = make('App\Reply', [
          'body' => 'A regular reply.'
      ]);
 

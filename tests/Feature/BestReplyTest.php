@@ -12,7 +12,7 @@ class BestReplyTest extends TestCase
     /** @test */
     public function a_thread_creator_may_mark_any_reply_as_the_best_reply()
     {
-        $this->withoutExceptionHandling()->signIn();
+        $this->signIn();
 
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
@@ -28,7 +28,7 @@ class BestReplyTest extends TestCase
     /** @test */
     public function only_the_thread_creator_may_mark_the_reply_as_best()
     {
-        $this->withExceptionHandling()->signIn();
+        $this->signIn();
 
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
@@ -44,7 +44,7 @@ class BestReplyTest extends TestCase
     /** @test */
     public function if_a_best_reply_is_deleted_then_the_thread_is_properly_updated_to_reflect_that()
     {
-        $this->withoutExceptionHandling()->signIn();
+        $this->signIn();
 
         $reply = create('App\Reply', ['user_id' => auth()->id()]);
 

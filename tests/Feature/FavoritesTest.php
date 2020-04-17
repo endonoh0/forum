@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Reply;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -22,7 +21,7 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create(Reply::class);
+        $reply = create('App\Reply');
 
         $this->post('replies/' . $reply->id . '/favorites');
 
@@ -34,7 +33,7 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create(Reply::class);
+        $reply = create('App\Reply');
 
         $reply->favorite();
 
@@ -48,7 +47,7 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create(Reply::class);
+        $reply = create('App\Reply');
 
         try {
             $this->post('replies/' . $reply->id . '/favorites');

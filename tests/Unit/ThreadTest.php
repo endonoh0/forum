@@ -2,9 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\User;
-use App\Thread;
-use App\Channel;
 use Tests\TestCase;
 use App\Notifications\ThreadWasUpdated;
 use Illuminate\Support\Facades\Notification;
@@ -20,13 +17,13 @@ class ThreadTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = create(Thread::class);
+        $this->thread = create('App\Thread');
     }
 
     /** @test */
     public function a_thread_has_a_path()
     {
-        $thread = create(Thread::class);
+        $thread = create('App\Thread');
 
         $this->assertEquals(
             "/threads/{$thread->channel->slug}/{$thread->slug}", // {$thread->id}
@@ -37,7 +34,7 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_has_a_creator()
     {
-        $this->assertInstanceOf(User::class, $this->thread->creator);
+        $this->assertInstanceOf('App\User', $this->thread->creator);
     }
 
     /** @test */
@@ -79,9 +76,9 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_belongs_to_a_channel()
     {
-        $thread = create(Thread::class);
+        $thread = create('App\Thread');
 
-        $this->assertInstanceOf(Channel::class, $thread->channel);
+        $this->assertInstanceOf('App\Channel', $thread->channel);
     }
 
     /** @test */
@@ -112,8 +109,6 @@ class ThreadTest extends TestCase
     /** @test */
     public function it_knows_if_the_authenticated_user_is_subscribed_to_it()
     {
-        $this->withoutExceptionHandling();
-
         $thread = create('App\Thread');
 
         $this->signIn();
@@ -128,8 +123,6 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_can_check_if_the_authenticated_user_has_read_all_replies()
     {
-        $this->withoutExceptionHandling();
-
         $this->signIn();
 
         $thread = create('App\Thread');

@@ -2,8 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\User;
-use App\Reply;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -15,15 +13,15 @@ class ReplyTest extends TestCase
     /** @test */
     public function a_reply_has_an_owner()
     {
-        $reply = create(Reply::class);
+        $reply = create('App\Reply');
 
-        $this->assertInstanceOf(User::class, $reply->owner);
+        $this->assertInstanceOf('App\User', $reply->owner);
     }
 
     /** @test */
     public function it_knows_if_it_was_just_posted()
     {
-        $reply = create(Reply::class);
+        $reply = create('App\Reply');
 
         $this->assertTrue($reply->wasJustPosted());
 

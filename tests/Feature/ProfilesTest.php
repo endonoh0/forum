@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Thread;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -14,7 +12,7 @@ class ProfilesTest extends TestCase
     /** @test */
     public function a_user_has_a_profile()
     {
-        $user = create(User::class);
+        $user = create('App\User');
 
         $this->get("/profiles/{$user->name}")
             ->assertSee($user->name);
@@ -25,7 +23,7 @@ class ProfilesTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create(Thread::class, ['user_id' => auth()->id()]);
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
         $this->get("/profiles/" . auth()->user()->name)
             ->assertSee($thread->title)

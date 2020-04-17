@@ -12,7 +12,7 @@ class LockThreadsTest extends TestCase
     /** @test */
     public function non_administrators_may_not_lock_threads()
     {
-        $this->withExceptionHandling()->signIn();
+        $this->signIn();
 
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
@@ -24,7 +24,7 @@ class LockThreadsTest extends TestCase
     /** @test */
     public function administrators_can_lock_threads()
     {
-        $this->withoutExceptionHandling()->signIn(factory('App\User')->states('administrator')->create());
+        $this->signIn(factory('App\User')->states('administrator')->create());
 
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
@@ -36,7 +36,7 @@ class LockThreadsTest extends TestCase
     /** @test */
     public function administrators_can_unlock_threads()
     {
-        $this->withoutExceptionHandling()->signIn(factory('App\User')->states('administrator')->create());
+        $this->signIn(factory('App\User')->states('administrator')->create());
 
         $thread = create('App\Thread', ['user_id' => auth()->id(), 'locked' => true]);
 
@@ -48,7 +48,7 @@ class LockThreadsTest extends TestCase
     /** @test */
     public function once_locked_a_thread_may_not_recieve_new_replies()
     {
-        $this->withoutExceptionHandling()->signIn();
+        $this->signIn();
 
         $thread = create('App\Thread', ['locked' => true]);
 
