@@ -16,9 +16,9 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "predis/predis": "^1.1",
-        "psr/http-message": "^1.0",
-        "sentry/sentry-laravel": "1.5.0"
+        "psr/http-message": "^1.0"
     },
+
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
         "facade/ignition": "^1.4",
