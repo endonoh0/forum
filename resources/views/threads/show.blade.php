@@ -9,36 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-
-                    {{-- Thread --}}
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="level">
-                    {{-- Thread creator avatar --}}
-                                <img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-3">
-
-                                <span class="flex">
-                    {{-- Link to profile --}}
-                                    <a href="{{ route('profile', $thread->creator) }}">
-                                        {{ $thread->creator->name }}</a> posted: {{ $thread->title }}</span>
-                    {{-- Delete thread --}}
-                                @can ('update', $thread)
-                                    <form method="POST" action="{{ $thread->path() }}">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="btn btn-link">Delete Thread</button>
-                                    </form>
-                                @endcan
-                            </div>
-                        </div>
-                    {{-- Thread body --}}
-                        <div class="card-body">
-                            {{ $thread->body }}
-                        </div>
-                    </div>
-                    <br>
-
+                    @include ('threads._question')
                     {{-- Reply --}}
                     <replies @added="repliesCount++" @removed="repliesCount--"></replies>
                     <br>

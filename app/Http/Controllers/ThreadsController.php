@@ -54,13 +54,12 @@ class ThreadsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Rules\Recaptcha      $recaptcha
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Recaptcha $recaptcha)
+    public function store(Recaptcha $recaptcha)
     {
-        $this->validate($request, [
+        request()->validate([
             'title' => 'required|spamfree',
             'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id',
