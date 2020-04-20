@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/threads', 'ThreadsController@index')->name('threads');
 Route::get('/threads/create', 'ThreadsController@create');
+Route::get('/threads/search', 'SearchController@show');
 Route::get('/threads/{channel}/{thread}', 'ThreadsController@show')->name('threads.show');
 Route::patch('/threads/{channel}/{thread}', 'ThreadsController@update')->name('threads.update');
 Route::delete('/threads/{channel}/{thread}', 'ThreadsController@destroy');
