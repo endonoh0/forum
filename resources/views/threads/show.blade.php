@@ -11,7 +11,7 @@
                 <div class="col-md-8">
                     @include ('threads._question')
                     {{-- Reply --}}
-                    <replies @added="repliesCount++" @removed="repliesCount--"></replies>
+                    <replies class="editor-content" @added="repliesCount++" @removed="repliesCount--"></replies>
                     <br>
                 </div>
 

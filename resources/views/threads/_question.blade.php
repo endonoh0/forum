@@ -8,7 +8,7 @@
 {{-- Thread body --}}
     <div class="card-body">
         <div class="form-group">
-            <wysiwyg class="editor-content" v-model="form.body" :value="form.body"></wysiwyg>
+            <wysiwyg class="editor-content" v-model="form.body"></wysiwyg>
         </div>
     </div>
 {{-- Thread Edit  --}}

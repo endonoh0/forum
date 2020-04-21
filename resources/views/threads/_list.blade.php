@@ -27,7 +27,7 @@
         </div>
         {{-- Thread body --}}
         <div class="card-body">
-            {{ $thread->body }}
+            {!! $thread->body !!}
         </div>
         {{-- Visit count --}}
         <div class="card-footer">
