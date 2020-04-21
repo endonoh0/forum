@@ -111,15 +111,31 @@ class Reply extends Model
     /**
      * Determine if the current reply is marked as the best.
      *
-     * @return boolean
+     * @return bool
      */
     public function isBest()
     {
         return $this->thread->best_reply_id == $this->id;
     }
 
+    /**
+     * Determine if the current reply is marked as the best.
+     *
+     * @param bool
+     */
     public function getIsBestAttribute()
     {
         return $this->isBest();
+    }
+
+    /**
+     * Access the body attribute.
+     *
+     * @param  string $body
+     * @return string
+     */
+    public function getBodyAttribute($body)
+    {
+        return \Purify::clean($body);
     }
 }

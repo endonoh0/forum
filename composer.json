@@ -18,7 +18,8 @@
         "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
         "predis/predis": "^1.1",
-        "psr/http-message": "^1.0"
+        "psr/http-message": "^1.0",
+        "stevebauman/purify": "^3.0"
     },
 
     "require-dev": {
