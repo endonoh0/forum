@@ -83100,41 +83100,52 @@ var render = function() {
       ? _c("div", { staticClass: "card-footer level" }, [
           _vm.editing
             ? _c("div", [
-                _c("form", { on: { submit: _vm.update } }, [
-                  _c(
-                    "button",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.editing,
-                          expression: "editing"
-                        }
-                      ],
-                      staticClass: "button btn-xs btn-primary mr-2"
-                    },
-                    [_vm._v("Update")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.editing,
-                          expression: "editing"
-                        }
-                      ],
-                      staticClass: "button btn-xs btn-link",
-                      attrs: { type: "button" },
-                      on: { click: _vm.cancel }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ])
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.update($event)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editing,
+                            expression: "editing"
+                          }
+                        ],
+                        staticClass: "button btn-xs btn-primary mr-2"
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editing,
+                            expression: "editing"
+                          }
+                        ],
+                        staticClass: "button btn-xs btn-link",
+                        attrs: { type: "button" },
+                        on: { click: _vm.cancel }
+                      },
+                      [_vm._v("Cancel")]
+                    )
+                  ]
+                )
               ])
             : _vm._e(),
           _vm._v(" "),

@@ -25,7 +25,7 @@
 
         <div class="card-footer level" v-if="authorize('owns', reply) || authorize('owns', reply.thread)">
             <div v-if="editing">
-                <form @submit="update">
+                <form @submit.prevent="update">
                     <button class="button btn-xs btn-primary mr-2" v-show="editing">Update</button>
                     <button class="button btn-xs btn-link" @click="cancel" type="button" v-show="editing">Cancel</button>
                 </form>
