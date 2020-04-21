@@ -14417,3 +14417,11 @@ a.text-dark:focus {
   background-color: #fff;
 }
 
+.editor-content blockquote {
+  font-style: italic;
+}
+
+.editor-content pre {
+  background-color: #eff0f1;
+}
+

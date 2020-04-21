@@ -8,7 +8,7 @@
 {{-- Thread body --}}
     <div class="card-body">
         <div class="form-group">
-            <textarea class="form-control" rows="10" v-model="form.body"></textarea>
+            <wysiwyg class="editor-content" v-model="form.body" :value="form.body"></wysiwyg>
         </div>
     </div>
 {{-- Thread Edit  --}}
@@ -48,7 +48,7 @@
         </div>
     </div>
 {{-- Thread body --}}
-    <div class="card-body" v-text="body"></div>
+    <div class="card-body editor-content" v-html="body"></div>
 {{-- Thread Edit  --}}
     <div class="card-footer" v-if="authorize('owns', thread)">
         <button class="btn-sm btn-outline-dark" @click="editing = true">Edit</button>
