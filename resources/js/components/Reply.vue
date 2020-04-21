@@ -16,24 +16,27 @@
 
         <div class="card-body">
             <div v-if="editing">
-                <form @submit="update">
-                    <div class="form-group">
-                        <wysiwyg v-model="body"></wysiwyg>
-                    </div>
-                    <button class="button btn-xs btn-primary">Update</button>
-                    <button class="button btn-xs btn-link" @click="editing = false" type="button">Cancel</button>
-                </form>
+                <div class="form-group">
+                    <wysiwyg v-model="body"></wysiwyg>
+                </div>
             </div>
             <div v-else v-html="body"></div>
         </div>
 
         <div class="card-footer level" v-if="authorize('owns', reply) || authorize('owns', reply.thread)">
-            <div v-if="authorize('owns', reply)">
-                <button class="btn-info btn-xs mr-3" @click="editing = true">Edit</button>
-                <button class="btn-info btn-xs btn-danger mr-3" @click="destroy">Delete</button>
+            <div v-if="editing">
+                <form @submit="update">
+                    <button class="button btn-xs btn-primary mr-2" v-show="editing">Update</button>
+                    <button class="button btn-xs btn-link" @click="cancel" type="button" v-show="editing">Cancel</button>
+                </form>
             </div>
 
-            <button class="btn-info btn-xs btn-default ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply?</button>
+            <div v-if="authorize('owns', reply)">
+                <button class="btn-info btn-xs" @click="editing = true" v-show="! editing">Edit</button>
+            </div>
+
+            <button class="btn btn-link ml-auto" @click="destroy" v-show="editing">Delete Reply</button>
+            <button class="btn-info btn-xs btn-default ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)" v-show="! editing">Best Reply?</button>
         </div>
     </div>
 </template>
@@ -74,13 +77,19 @@
                     '/replies/' + this.id, {
                         body: this.body
                 })
+                .then(() => {
+                    this.editing = false;
+                    this.body = this.reply.body;
+                    flash('Updated!');
+                })
                 .catch(error => {
                     flash(error.response.data, 'danger');
                 });
+            },
 
+            cancel() {
+                this.body = this.reply.body;
                 this.editing = false;
-
-                flash('Updated!');
             },
 
             destroy() {

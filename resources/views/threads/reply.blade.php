@@ -25,10 +25,11 @@
                     <textarea class="form-control" v-model="body"></textarea>
                 </div>
                 {{-- Update the reply --}}
-                <button class="button btn-xs btn-primary" @click="update">Update</button>
+                <button class="button btn-xs btn-primary" @click.once="update">Update</button>
                 {{-- Cancel the edit --}}
-                <button class="button btn-xs btn-link" @click="editing = false">Cancel</button>
+                <button class="button btn-xs btn-link" @click="cancel">Cancel</button>
             </div>
+
             <div v-else v-text="body"></div>
         </div>
 

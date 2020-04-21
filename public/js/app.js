@@ -8807,6 +8807,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8836,13 +8839,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     update: function update() {
+      var _this2 = this;
+
       axios.patch('/replies/' + this.id, {
         body: this.body
+      }).then(function () {
+        _this2.editing = false;
+        _this2.body = _this2.reply.body;
+        flash('Updated!');
       })["catch"](function (error) {
         flash(error.response.data, 'danger');
       });
+    },
+    cancel: function cancel() {
+      this.body = this.reply.body;
       this.editing = false;
-      flash('Updated!');
     },
     destroy: function destroy() {
       axios["delete"]('/replies/' + this.id);
@@ -83065,54 +83076,82 @@ var render = function() {
     _c("div", { staticClass: "card-body" }, [
       _vm.editing
         ? _c("div", [
-            _c("form", { on: { submit: _vm.update } }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("wysiwyg", {
-                    model: {
-                      value: _vm.body,
-                      callback: function($$v) {
-                        _vm.body = $$v
-                      },
-                      expression: "body"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("button", { staticClass: "button btn-xs btn-primary" }, [
-                _vm._v("Update")
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "button btn-xs btn-link",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.editing = false
-                    }
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("wysiwyg", {
+                  model: {
+                    value: _vm.body,
+                    callback: function($$v) {
+                      _vm.body = $$v
+                    },
+                    expression: "body"
                   }
-                },
-                [_vm._v("Cancel")]
-              )
-            ])
+                })
+              ],
+              1
+            )
           ])
         : _c("div", { domProps: { innerHTML: _vm._s(_vm.body) } })
     ]),
     _vm._v(" "),
     _vm.authorize("owns", _vm.reply) || _vm.authorize("owns", _vm.reply.thread)
       ? _c("div", { staticClass: "card-footer level" }, [
+          _vm.editing
+            ? _c("div", [
+                _c("form", { on: { submit: _vm.update } }, [
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editing,
+                          expression: "editing"
+                        }
+                      ],
+                      staticClass: "button btn-xs btn-primary mr-2"
+                    },
+                    [_vm._v("Update")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editing,
+                          expression: "editing"
+                        }
+                      ],
+                      staticClass: "button btn-xs btn-link",
+                      attrs: { type: "button" },
+                      on: { click: _vm.cancel }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _vm.authorize("owns", _vm.reply)
             ? _c("div", [
                 _c(
                   "button",
                   {
-                    staticClass: "btn-info btn-xs mr-3",
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.editing,
+                        expression: "! editing"
+                      }
+                    ],
+                    staticClass: "btn-info btn-xs",
                     on: {
                       click: function($event) {
                         _vm.editing = true
@@ -83120,23 +83159,39 @@ var render = function() {
                     }
                   },
                   [_vm._v("Edit")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn-info btn-xs btn-danger mr-3",
-                    on: { click: _vm.destroy }
-                  },
-                  [_vm._v("Delete")]
                 )
               ])
             : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.editing,
+                  expression: "editing"
+                }
+              ],
+              staticClass: "btn btn-link ml-auto",
+              on: { click: _vm.destroy }
+            },
+            [_vm._v("Delete Reply")]
+          ),
           _vm._v(" "),
           _vm.authorize("owns", _vm.reply.thread)
             ? _c(
                 "button",
                 {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.editing,
+                      expression: "! editing"
+                    }
+                  ],
                   staticClass: "btn-info btn-xs btn-default ml-a",
                   on: { click: _vm.markBestReply }
                 },
