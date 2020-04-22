@@ -53,7 +53,7 @@ trait Favoritable
     /**
      * Check if the current reply is favorited.
      *
-     * @return boolean
+     * @return bool
      */
     public function isFavorited()
     {
