@@ -12,6 +12,6 @@ public/fonts
 public/images
 public/js
 public/mix-manifest.json
-
+.DS_Store
 
 
