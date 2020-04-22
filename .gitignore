@@ -1,26 +1,17 @@
-### Laravel ###
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
-/.vscode
-.eslintrc.json
-.editorconfig
-
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
-
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
+/node_modules
+/public/storage
+/public/hot
 storage/*.key
+/storage/purify
+/vendor
+/.idea
 .env
-.env.backup
-.env.example
-.DS_Store
-Homestead.yaml
-Homestead.json
-/.vagrant
 .phpunit.result.cache
+public/css
+public/fonts
+public/images
+public/js
+public/mix-manifest.json
+
+
 
