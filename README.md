@@ -10,8 +10,8 @@ Clone this repository to your machine, and install all Composer dependencies.
 ```
 git clone https://github.com/endonoh0/forum
 cd forum && composer install
-php artisan key:generate
 cp .env.example .env
+php artisan key:generate
 npm install && npm run dev
 php artisan scout:import 'App\Thread'
 ```
