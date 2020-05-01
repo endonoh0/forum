@@ -39,4 +39,4 @@ php artisan cache:clear
 ```
 
 #### Step 5: 
-Visit http://forum.dev/threads to create a new account and publish your first thread.
+Visit http://forum.test/threads to create a new account and publish your first thread.
