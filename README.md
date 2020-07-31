@@ -12,6 +12,22 @@ This project is an open source forum based on Laracasts' Let's Build a Forum wit
 
 # Screenshots
 
+## All Threads Page
+
+![Screenshot of all threads](docs/thread-index-page.png)
+
+## Thread Page
+
+![Screenshot of a thread](docs/thread-page.png)
+
+## New Thread
+
+![Screenshot of creating a new thread](docs/edit-thread-page.png)
+
+## Profile Page
+
+![Screenshot of a user's profile page](docs/profile-page.png)
+
 ## Installation
 > You must have PHP 7 installed as a prerequisite.
 
@@ -50,3 +66,23 @@ php artisan cache:clear
 
 #### Step 5: 
 Visit http://forum.test/threads to create a new account and publish your first thread.
+
+# Dependencies
+
+- PHP 7.x or above
+- algoliasearch
+- at.js
+- font-awesome
+- instantsearch.css
+- vue-instantsearch
+- cross-env
+- axios
+- laravel-mix
+- minimist
+- moment
+- resolve-url-loader
+- sass
+- sass-loader
+- vue
+- vue-template-compiler
+
