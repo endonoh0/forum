@@ -1,6 +1,16 @@
 # Build A Forum with Laravel and TDD
 ---
-This project is an open source forum that was built at [Laracasts.com](http://laracasts.com/series/lets-build-a-forum-with-laravel).
+This project is an open source forum based on Laracasts' Let's Build a Forum with Laravel video series.
+
+# Main Features
+
+- Users can browse threads by popularity, unanswered, and their own threads
+- Users can filter/search threads by a keyword
+- Users can subscribe to threads
+- Users can create, edit, delete, and favorite comments
+- Users can view their activity history 
+
+# Screenshots
 
 ## Installation
 > You must have PHP 7 installed as a prerequisite.
