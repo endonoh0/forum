@@ -14,19 +14,19 @@ This project is an open source forum based on Laracasts' Let's Build a Forum wit
 
 ## All Threads Page
 
-![Screenshot of all threads](docs/thread-index-page.png)
+![Screenshot of all threads](https://github.com/endonoh0/forum/blob/master/docs/thread-index-page.png)
 
 ## Thread Page
 
-![Screenshot of a thread](docs/thread-page.png)
+![Screenshot of a thread](https://github.com/endonoh0/forum/blob/master/docs/thread-page.png)
 
 ## New Thread
 
-![Screenshot of creating a new thread](docs/edit-thread-page.png)
+![Screenshot of creating a new thread](https://github.com/endonoh0/forum/blob/master/docs/edit-thread-page.png)
 
 ## Profile Page
 
-![Screenshot of a user's profile page](docs/profile-page.png)
+![Screenshot of a user's profile page](https://github.com/endonoh0/forum/blob/master/docs/profile-page.png)
 
 ## Installation
 > You must have PHP 7 installed as a prerequisite.
